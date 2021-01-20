@@ -13,7 +13,7 @@
 > minikube start
 ```
 
-### Acces cluster (-- to dl appropriate ver of kubectl)
+### Acces cluster (-- to download appropriate version of kubectl)
 
 ```bash
 > minikube kubectl -- get po -A
@@ -32,7 +32,7 @@ kubectl expose deployment hello-minikube --type=NodePort --port=8080
 8080 : Application service port in Kubernetes
 30089 : forwarded port to be accessed within the browser
 
-``bash
+```bash
 > kubectl get services hello-minikube
 
 NAME             TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
@@ -99,19 +99,19 @@ Increase the default memory limit (requires a restart):
 Browse the catalog of easily installed Kubernetes services:
 
 ```bash
-minikube addons list
+> minikube addons list
 ```
 
 Create a second cluster running an older Kubernetes release:
 
 ```bash
-minikube start -p aged --kubernetes-version=v1.16.1
+> minikube start -p aged --kubernetes-version=v1.16.1
 ```
 
 Delete all of the minikube clusters:
 
 ```bash
-minikube delete --all
+> minikube delete --all
 ```
 
 
