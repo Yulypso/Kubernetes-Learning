@@ -24,7 +24,7 @@
 
 ```bash
 > kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4
-kubectl expose deployment hello-minikube --type=NodePort --port=8080
+> kubectl expose deployment hello-minikube --type=NodePort --port=8080
 ```
 
 ### Show deployment
@@ -113,9 +113,6 @@ Delete all of the minikube clusters:
 ```bash
 > minikube delete --all
 ```
-
-
-
 
 
 
