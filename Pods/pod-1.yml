@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: www.my-node-app.com
+  labels:
+    app: my-node-app
+spec:
+  containers:
+  - name: node-app
+    image: yulypso/node-app
+    ports:
+    - containerPort: 3000
