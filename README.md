@@ -27,16 +27,22 @@
     ```
 
 ### Kubernetes
-1. Create pod yaml file
+1. Create pod yml file
 2. Create pod on the Kubernetes cluster
     ```bash
     $ kubectl create -f Pods/pod-1.yml
     ```
-3. Expose pod to create a service 
+3. Create service
+   - Expose pod through command line
     ```bash
     $ kubectl expose pod www.my-node-app.com --port=3000 --name=frontend --type=LoadBalancer
     ```
-4. Access exposed service at **localhost:3000** from browser
+    - Create service yml file
+    ```bash
+    $ kubectl create -f Services/service-1.yml
+    ```
+   
+4. Access exposed service at **localhost:\<port\>** from the browser
 
 **Info:** Kubernetes needs DockerHub images to work
 **Info:** Kubernetes exposed pod port must be at the same image defined port.
