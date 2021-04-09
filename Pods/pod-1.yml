@@ -9,4 +9,5 @@ spec:
   - name: node-app
     image: yulypso/node-app
     ports:
-    - containerPort: 3000
+    - name: nodejs-port
+      containerPort: 3000
