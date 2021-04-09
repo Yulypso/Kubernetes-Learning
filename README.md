@@ -4,13 +4,18 @@
 
 [Thierry Khamphousone](https://www.linkedin.com/in/tkhamphousone/)
 
+---
+
 <br/>
 
 ## For Docker
 
 ```bash
+$ docker build -t yulypso/node-app:v0.0.1 .
 $ Docker run -p 8000:3000 yulypso/node-app
 ```
+
+---
 
 <br/>
 
@@ -67,7 +72,28 @@ $ Docker run -p 8000:3000 yulypso/node-app
 
 <br/>
 
-### Kubernetes - create ReplicationController: Controllers/
+### Useful command
+
+- Attach to the running process (get some logs if exists)
+```
+$ kubectl attach www.my-node-app.com
+```
+
+- Execute commands within a container
+```bash
+$ kubectl exec www.my-node-app.com -- ls
+```
+
+- Execute a shell, this creates a new pod with a new container
+```bash
+$ kubectl run -i --tty node-app-sh --image=yulypso/node-app --restart=Never -- sh
+```
+
+---
+
+<br/>
+
+### Kubernetes - Create ReplicationController: Controllers/
 
 Horizontal scaling **Only for Stateless app** 
 
@@ -84,28 +110,56 @@ $ kubectl scale --replicas=4 rc/node-app-controller
 
 <br/>
 
-### Useful command
+### Kubernetes - Create Deployments: Deployments/
 
-- Attach to the running process (get some logs if exists)
-```
-$ kubectl attach www.my-node-app.com
-```
-
-- Execute commands within a container
 ```bash
-$ kubectl exec www.my-node-app.com -- ls
+# Create deployment
+$ kubectl create -f Deployments/deployment-1.yml  
+
+# Expose deployment
+$ kubectl expose deployment node-app-deployment --type=LoadBalancer --port=3000 --name=node-app-v1
+
+> Browser acces: localhost:3000
+-> "Node Server"
+
+# Run deployment with another version of image (version: v0.0.2)
+$ kubectl set image deployment/node-app-deployment node-app=yulypso/node-app:v0.0.2
+
+# Get deployment status after updating version
+$ kubectl rollout status deployment/node-app-deployment
+
+> Browser acces: localhost:3000
+-> "Node Server Version 2"
+
+# Get rollout history
+$ kubectl rollout history deployment/node-app-deployment
+
+# Run deployment to the previous version 
+$ kubectl rollout undo deployment/node-app-deployment
+
+# Run deployment to a previous version n (number comes from rollout history)
+$ kubectl rollout undo deployment/node-app-deployment --to-revision=n
+
+> Browser acces: localhost:3000
+-> "Node Server"
 ```
 
-- Execute a shell, this creates a new pod with a new container
-```bash
-kubectl run -i --tty node-app-sh --image=yulypso/node-app --restart=Never -- sh
-```
+**Info:** Kubernetes version changes must be on DockerHub to work
+
+---
+
+<br/>
+
+
+
+
 
 ### Get information
 
 ```bash
-$ kubectl get {pod|po}
+$ kubectl get {pod|po} [--show-labels]
 $ kubectl get {deployment|deploy}
 $ kubectl get {service|svc}
 $ kubectl get {replicationcontroller|rc}
+$ kubectl get {replicaset|rs}
 ```
