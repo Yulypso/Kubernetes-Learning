@@ -117,20 +117,24 @@ $ kubectl scale --replicas=4 rc/node-app-controller
 $ kubectl create -f Deployments/deployment-1.yml  
 
 # Expose deployment
-$ kubectl expose deployment node-app-deployment --type=LoadBalancer --port=3000 --name=node-app-v1
+$ kubectl expose deployment node-app-deployment --type=LoadBalancer --port=3000 --name=node-app-deployment
+```
 
-> Browser acces: localhost:3000
+Browser acces: http://localhost:3000
 -> "Node Server"
 
+```bash
 # Run deployment with another version of image (version: v0.0.2)
 $ kubectl set image deployment/node-app-deployment node-app=yulypso/node-app:v0.0.2
 
 # Get deployment status after updating version
 $ kubectl rollout status deployment/node-app-deployment
+```
 
-> Browser acces: localhost:3000
+Browser acces: http://localhost:3000
 -> "Node Server Version 2"
 
+```bash
 # Get rollout history
 $ kubectl rollout history deployment/node-app-deployment
 
@@ -139,10 +143,10 @@ $ kubectl rollout undo deployment/node-app-deployment
 
 # Run deployment to a previous version n (number comes from rollout history)
 $ kubectl rollout undo deployment/node-app-deployment --to-revision=n
-
-> Browser acces: localhost:3000
--> "Node Server"
 ```
+
+Browser acces: http://localhost:3000/
+-> "Node Server"
 
 **Info:** Kubernetes version changes must be on DockerHub to work
 
@@ -150,16 +154,26 @@ $ kubectl rollout undo deployment/node-app-deployment --to-revision=n
 
 <br/>
 
-
-
-
-
 ### Get information
 
 ```bash
-$ kubectl get {pod|po} [--show-labels]
-$ kubectl get {deployment|deploy}
+$ kubectl get {pod|po} [--show-labels] [--output=wide]
+$ kubectl get {deployment|deploy} 
 $ kubectl get {service|svc}
 $ kubectl get {replicationcontroller|rc}
 $ kubectl get {replicaset|rs}
+$ kubectl get {node|no} [--output=wide]
+$ kubectl get {serviceaccount|sa}
+$ kubectl get {secrets}
 ```
+
+---
+
+<br/>
+
+### Kubernetes Dashboard
+
+```bash
+$ kubectl proxy &
+```
+Browser acces: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/\#/service?namespace=default
