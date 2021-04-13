@@ -164,6 +164,65 @@ $ kubectl label nodes docker-desktop hardware=high-spec
 
 <br/>
 
+### Lifecycle
+
+<p align="center" width="100%">
+    <img align="center" width="600" src="./Images/pod-lifecycle.jpg"/>
+</p>
+
+1. init container starts, usually to start database (status: pod scheduled)
+2. post start hook is run for settings (status: pod initialized)
+3. main container starts
+4. health check: readiness probe (status: pod ready)
+5. main container duration was set on 120 sec then it sleeps
+6. pre stop hook starts
+7. health check: liveness probe -> restart pod and go back to 1.
+
+Screen 1
+```bash
+$ watch -n1 kubectl get pod
+
+# 1
+NAME                         READY   STATUS    RESTARTS   AGE
+lifecycle-596bcc4b98-nll8s   0/1     Running   0          12s
+
+#2
+NAME                         READY   STATUS    RESTARTS   AGE
+lifecycle-596bcc4b98-nll8s   1/1     Running   0          40s
+
+#3
+NAME                         READY   STATUS      RESTARTS   AGE
+lifecycle-596bcc4b98-nll8s   0/1     Completed   1          2m
+
+#4
+NAME                         READY   STATUS    RESTARTS   AGE
+lifecycle-596bcc4b98-nll8s   0/1     Running   1          2m20s
+```
+
+Screen 2
+```bash
+$ kubectl create -f Deployments/deployment-4.yml    
+$ kubectl exec -it lifecycle-596bcc4b98-nll8s -- tail -f /timing
+# -i: stdin
+# -t: tty
+# -- [command]: executes tail -f on the file timing at / 
+1618331430: Running
+1618331430: postStart
+1618331440: end postStart
+1618331469: livenessProbe
+1618331470: readinessProbe
+1618331479: livenessProbe
+1618331480: readinessProbe
+command terminated with exit code 137
+
+#2 we need to wait the pod restarts : 
+error: unable to upgrade connection: container not found ("lifecycle-container")
+```
+
+---
+
+<br/>
+
 ### {get, edit} information
 
 ```bash
@@ -175,6 +234,7 @@ $ kubectl {get, edit} {replicaset|rs}
 $ kubectl {get, edit} {node|no} [--output=wide] [--show-labels]
 $ kubectl {get, edit} {serviceaccount|sa}
 $ kubectl {get, edit} {secrets}
+$ kubectl {get, edit} {namespace}
 
 # watch in real time pod status
 $ watch -n1 kubectl get pod
