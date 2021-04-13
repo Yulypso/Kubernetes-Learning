@@ -154,6 +154,17 @@ Browser acces: http://localhost:3000/
 
 <br/>
 
+### Add Label to a Node
+
+```bash
+$ kubectl label nodes docker-desktop hardware=high-spec
+```
+
+
+---
+
+<br/>
+
 ### Get information
 
 ```bash
@@ -162,7 +173,7 @@ $ kubectl get {deployment|deploy}
 $ kubectl get {service|svc}
 $ kubectl get {replicationcontroller|rc}
 $ kubectl get {replicaset|rs}
-$ kubectl get {node|no} [--output=wide]
+$ kubectl get {node|no} [--output=wide] [--show-labels]
 $ kubectl get {serviceaccount|sa}
 $ kubectl get {secrets}
 ```
@@ -177,3 +188,13 @@ $ kubectl get {secrets}
 $ kubectl proxy &
 ```
 Browser acces: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/\#/service?namespace=default
+
+
+---
+
+<br/>
+
+### Yml files
+
+- **service-2.yml**: create service type NodePort for a **pod-1.yml** created, browser acces at http://localhost:31001
+- **deployment-2.yml**: create deployment for a specific Node by specifying a label. Useful for cluster with multiple Nodes. 
