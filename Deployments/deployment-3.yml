@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-deployment
+  labels: 
+    app: my-node-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-node-app
+  template:
+    metadata:
+      labels: 
+        app: my-node-app
+    spec:
+      containers:
+      - name: node-app
+        image: yulypso/node-app:v0.0.1
+        ports:
+        - containerPort: 3000
+        livenessProbe: #for health check 
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15 # first get / after 15 sec and if the response is not 200 OK, it restarts pod
+          timeoutSeconds: 30
+        readinessProbe: #for readiness check 
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15 # get / after 15 sec before setting pod on ready
+          timeoutSeconds: 30

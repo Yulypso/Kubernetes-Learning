@@ -19,5 +19,5 @@ spec:
         image: yulypso/node-app:v0.0.1
         ports:
         - containerPort: 3000
-      nodeSelector:
+      nodeSelector: # to run on a specific node within the cluster
         hardware: high-spec

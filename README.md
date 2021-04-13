@@ -160,22 +160,24 @@ Browser acces: http://localhost:3000/
 $ kubectl label nodes docker-desktop hardware=high-spec
 ```
 
-
 ---
 
 <br/>
 
-### Get information
+### {get, edit} information
 
 ```bash
-$ kubectl get {pod|po} [--show-labels] [--output=wide]
-$ kubectl get {deployment|deploy} 
-$ kubectl get {service|svc}
-$ kubectl get {replicationcontroller|rc}
-$ kubectl get {replicaset|rs}
-$ kubectl get {node|no} [--output=wide] [--show-labels]
-$ kubectl get {serviceaccount|sa}
-$ kubectl get {secrets}
+$ kubectl {get, edit} {pod|po} [--show-labels] [--output=wide]
+$ kubectl {get, edit} {deployment|deploy} 
+$ kubectl {get, edit} {service|svc}
+$ kubectl {get, edit} {replicationcontroller|rc}
+$ kubectl {get, edit} {replicaset|rs}
+$ kubectl {get, edit} {node|no} [--output=wide] [--show-labels]
+$ kubectl {get, edit} {serviceaccount|sa}
+$ kubectl {get, edit} {secrets}
+
+# watch in real time pod status
+$ watch -n1 kubectl get pod
 ```
 
 ---
@@ -196,5 +198,6 @@ Browser acces: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/serv
 
 ### Yml files
 
-- **service-2.yml**: create service type NodePort for a **pod-1.yml** created, browser acces at http://localhost:31001
-- **deployment-2.yml**: create deployment for a specific Node by specifying a label. Useful for cluster with multiple Nodes. 
+- **service-2.yml**: create a service type NodePort for a **pod-1.yml** created, browser acces at http://localhost:31001
+- **deployment-2.yml**: create a deployment for a specific Node by specifying a label. Useful for cluster with multiple Nodes. 
+- **deployment-3.yml**: create a deployment with health check to ensure the availability and resiliency of the app even if the pod and deployment are still alive.

@@ -19,3 +19,4 @@ spec:
         image: yulypso/node-app:v0.0.1
         ports:
         - containerPort: 3000
+    
