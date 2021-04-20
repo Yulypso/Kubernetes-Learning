@@ -289,3 +289,18 @@ root
 - **deployment-3.yml**: create a deployment with health check to ensure the availability and resiliency of the app even if the pod and deployment are still alive.
 - **deployment-4.yml**: create a deployment for lifecycle (postStar/preStop)
 - **deployment-5.yml**: create a deployment using Secrets
+
+---
+
+<br/>
+
+### Wordpress on Kubernetes
+
+```bash
+$ kubectl create -f Apps/Wordpress/wordpress-secrets.yml
+secret/wordpress-secrets created
+$ kubectl create -f Apps/Wordpress/wordpress-single-deployment-no-volumes.yml
+deployment.apps/wordpress-deployment created
+$ kubectl create -f Apps/Wordpress/wordpress-service.yml
+service/wordpress-service created
+```
