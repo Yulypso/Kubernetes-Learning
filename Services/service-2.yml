@@ -4,8 +4,8 @@ metadata:
    name: node-app-service
 spec:
    ports:
-   - port: 31002 # internal pod port -> traffic routed to targetPort 31002->3000
-     nodePort: 31001 # external acces expossed pod port
+   - port: 31002 # internal pod port -> traffic routed to targetPort 31002<->3000
+     nodePort: 31001 # external acces exposed pod port
      targetPort: nodejs-port  # container running app (port or ports name)
      protocol: TCP
    selector:

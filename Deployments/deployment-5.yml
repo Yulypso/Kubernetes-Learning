@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-node-app
+  template:
+    metadata:
+      labels:
+        app: my-node-app
+    spec:
+      containers:
+      - name: node-app
+        image: yulypso/node-app:v0.0.2
+        ports:
+        - name: nodejs-port
+          containerPort: 3000
+        volumeMounts: # using a file to provide secrets
+        - name: cred-volume
+          mountPath: /etc/creds
+          readOnly: true
+      volumes:
+      - name: cred-volume # name must be the same as VolumeMounts
+        secret:
+          secretName: db-secret
+
+            # Secrets must be created before creating the deployment
+
+            # secrets are stored in : 
+            # /etc/creds/db-secrets/username
+            # /etc/creds/db-secrets/password

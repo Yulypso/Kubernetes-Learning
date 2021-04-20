@@ -251,6 +251,32 @@ $ kubectl proxy &
 ```
 Browser acces: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/\#/service?namespace=default
 
+---
+
+<br/>
+
+### Secrets
+
+```bash
+# generate secret using files
+$ kubectl create secret generic db-user --from-file=Secrets/username.txt --from-file=Secrets/password.txt
+
+# generate secret for SSH key or SSL certificate
+$ kubectl create secret generic ssl-certificate --from-file=~/.ssh/id_rsa --ssl-cert=ssl-cert=myssl/cert.crt
+
+# create a deployment
+$ kubectl create -f Deployments/deployment-5.yml
+
+# access bash
+$ kubectl exec -it node-app-deployment-<random pod value> -- /bin/bash
+
+# get credentials, useful to connect database
+root@node-app-deployment-6dd5cfffd7-46tmh:/usr/src/app# cat /etc/creds/username 
+yulypso
+root@node-app-deployment-6dd5cfffd7-46tmh:/usr/src/app# cat /etc/creds/password 
+root
+```
+
 
 ---
 
@@ -261,3 +287,5 @@ Browser acces: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/serv
 - **service-2.yml**: create a service type NodePort for a **pod-1.yml** created, browser acces at http://localhost:31001
 - **deployment-2.yml**: create a deployment for a specific Node by specifying a label. Useful for cluster with multiple Nodes. 
 - **deployment-3.yml**: create a deployment with health check to ensure the availability and resiliency of the app even if the pod and deployment are still alive.
+- **deployment-4.yml**: create a deployment for lifecycle (postStar/preStop)
+- **deployment-5.yml**: create a deployment using Secrets

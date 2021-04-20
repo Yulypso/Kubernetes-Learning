@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-app-pod
+  labels:
+    app: my-node-app
+spec:
+  containers:
+  - name: node-app
+    image: yulypso/node-app:v0.0.2
+    ports:
+    - containerPort: 3000
+    volumeMounts: # using a file to provide secrets
+    - name: credvolume
+      mountPath: /etc/creds
+      readOnly: true
+  volumes:
+  - name: credvolume # name must be the same as VolumeMounts
+    secret:
+      secretName: db-secrets
+
+        # secrets are stored in : 
+        # /etc/creds/db-secrets/username
+        # /etc/creds/db-secrets/password

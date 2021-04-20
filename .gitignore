@@ -1,4 +1,5 @@
-kubernetes-course
+kubernetes-course/
 .DS_Store
 package-lock.json
-node_modules
+node_modules/
+Documents/

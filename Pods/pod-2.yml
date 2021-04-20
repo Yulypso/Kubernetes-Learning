@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-app-pod
+  labels:
+    app: my-node-app
+spec:
+  containers:
+  - name: node-app
+    image: yulypso/node-app:v0.0.2
+    ports:
+    - containerPort: 3000
+    env: # using secrets as environment variables
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: db-secret
+            key: username
+      - name: SECRET_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: db-secret
+            key: password
