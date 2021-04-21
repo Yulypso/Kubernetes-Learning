@@ -1,0 +1,356 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2021-04-12T19:52:34Z"
+    labels:
+      app: book-store
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+        f:spec:
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-12T19:52:34Z"
+    name: book-store
+    namespace: default
+    resourceVersion: "52194064"
+    selfLink: /api/v1/namespaces/default/services/book-store
+    uid: b7a6097b-708e-4429-a064-35bfa1c9d506
+  spec:
+    clusterIP: 10.100.145.163
+    ports:
+    - name: elb-port
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      app: book-store
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2021-04-12T19:30:49Z"
+    labels:
+      app: database
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+        f:spec:
+          f:clusterIP: {}
+          f:ports:
+            .: {}
+            k:{"port":27017,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-12T19:30:49Z"
+    name: database
+    namespace: default
+    resourceVersion: "52190801"
+    selfLink: /api/v1/namespaces/default/services/database
+    uid: 587d3c57-eb01-49c5-b450-05e5f2dea9d5
+  spec:
+    clusterIP: None
+    ports:
+    - name: db
+      port: 27017
+      protocol: TCP
+      targetPort: db
+    selector:
+      app: database
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2021-04-19T14:12:20Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:ports:
+            .: {}
+            k:{"port":6123,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":6124,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":6125,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":8081,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":50100,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-19T14:12:20Z"
+    name: flinkjobmanager
+    namespace: default
+    resourceVersion: "53604324"
+    selfLink: /api/v1/namespaces/default/services/flinkjobmanager
+    uid: fa8f1eb5-28fa-46fd-a439-fbded73743af
+  spec:
+    clusterIP: 10.100.108.249
+    ports:
+    - name: query
+      port: 6125
+      protocol: TCP
+      targetPort: query
+    - name: metrics
+      port: 50100
+      protocol: TCP
+      targetPort: metrics
+    - name: rpc
+      port: 6123
+      protocol: TCP
+      targetPort: rpc
+    - name: blob
+      port: 6124
+      protocol: TCP
+      targetPort: blob
+    - name: ui
+      port: 8081
+      protocol: TCP
+      targetPort: ui
+    selector:
+      app: du-jobmanager--36107583
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2021-04-12T20:00:30Z"
+    labels:
+      app: book-store-mongodb
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+        f:spec:
+          f:ports:
+            .: {}
+            k:{"port":27017,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-12T20:00:30Z"
+    name: mongodb-service
+    namespace: default
+    resourceVersion: "52195213"
+    selfLink: /api/v1/namespaces/default/services/mongodb-service
+    uid: afa87f56-e359-41a2-b81f-dea510e5561c
+  spec:
+    clusterIP: 10.100.101.150
+    ports:
+    - name: elb-port
+      port: 27017
+      protocol: TCP
+      targetPort: 27017
+    selector:
+      app: book-store-mongodb
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2021-04-19T14:12:23Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:ports:
+            .: {}
+            k:{"port":6121,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":6122,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":6125,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":50100,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-19T14:12:23Z"
+    name: tasksvc
+    namespace: default
+    resourceVersion: "53604340"
+    selfLink: /api/v1/namespaces/default/services/tasksvc
+    uid: 3dc39bdd-73ba-4330-9e4e-9e9ce8b39142
+  spec:
+    clusterIP: 10.100.133.0
+    ports:
+    - name: query
+      port: 6125
+      protocol: TCP
+      targetPort: query
+    - name: rpc
+      port: 6122
+      protocol: TCP
+      targetPort: rpc
+    - name: metrics
+      port: 50100
+      protocol: TCP
+      targetPort: metrics
+    - name: data
+      port: 6121
+      protocol: TCP
+      targetPort: data
+    selector:
+      app: du-taskmanager--1163954626
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2021-04-19T14:12:22Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:externalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8081,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-19T14:12:22Z"
+    name: ui-1309429078
+    namespace: default
+    resourceVersion: "53604335"
+    selfLink: /api/v1/namespaces/default/services/ui-1309429078
+    uid: 7cc51dfd-6c45-4b18-97be-4a0ab2c5335e
+  spec:
+    clusterIP: 10.100.47.53
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: ui
+      nodePort: 31083
+      port: 8081
+      protocol: TCP
+      targetPort: ui
+    selector:
+      app: du-jobmanager--36107583
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

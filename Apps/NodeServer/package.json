@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./app/index.js"
   },
-  "private":true,
+  "private": true,
   "author": "Thierry",
   "license": "ISC",
   "dependencies": {

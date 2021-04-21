@@ -1,0 +1,596 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2021-04-19T14:12:45Z"
+    generation: 1
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector:
+            f:matchLabels:
+              .: {}
+              f:app: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"kafkajobmanager--408661795"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"JOB_MANAGER_RPC_ADDRESS"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":6123,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":6124,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":6125,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":8081,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":50100,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/opt/flink/conf"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp/cfg"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"kafkajobmanager-408661795-configmap-cfg--261891684"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"kafkajobmanager-408661795-configmap-cfg-619985495"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-19T14:12:45Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-04-19T14:12:47Z"
+    name: du-jobmanager--36107583
+    namespace: default
+    resourceVersion: "53604451"
+    selfLink: /apis/apps/v1/namespaces/default/deployments/du-jobmanager--36107583
+    uid: c4eebc57-1ec0-4017-a039-6de13d1301e4
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: du-jobmanager--36107583
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: du-jobmanager--36107583
+      spec:
+        containers:
+        - args:
+          - jobmanager
+          env:
+          - name: JOB_MANAGER_RPC_ADDRESS
+            value: flinkjobmanager
+          image: flink:latest
+          imagePullPolicy: Always
+          name: kafkajobmanager--408661795
+          ports:
+          - containerPort: 6124
+            name: blob
+            protocol: TCP
+          - containerPort: 6123
+            name: rpc
+            protocol: TCP
+          - containerPort: 8081
+            name: ui
+            protocol: TCP
+          - containerPort: 6125
+            name: query
+            protocol: TCP
+          - containerPort: 50100
+            name: metrics
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp/cfg
+            name: kafkajobmanager-408661795-configmap-cfg--261891684
+          - mountPath: /opt/flink/conf
+            name: kafkajobmanager-408661795-configmap-cfg-619985495
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: kafkajobmanager-408661795-configmap-cfg--261891684
+          name: kafkajobmanager-408661795-configmap-cfg--261891684
+        - configMap:
+            defaultMode: 420
+            name: kafkajobmanager-408661795-configmap-cfg-619985495
+          name: kafkajobmanager-408661795-configmap-cfg-619985495
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2021-04-19T14:12:47Z"
+      lastUpdateTime: "2021-04-19T14:12:47Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2021-04-19T14:12:45Z"
+      lastUpdateTime: "2021-04-19T14:12:47Z"
+      message: ReplicaSet "du-jobmanager--36107583-6f66d7d9" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2021-04-19T14:12:35Z"
+    generation: 1
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector:
+            f:matchLabels:
+              .: {}
+              f:app: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"taskmanager--1356627504"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"JOB_MANAGER_RPC_ADDRESS"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"K8S_POD_IP"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":6121,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":6122,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":6125,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":50100,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/opt/flink/conf"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"taskmanager-1356627504-configmap-cfg--1388190740"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-19T14:12:35Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-04-19T14:12:38Z"
+    name: du-taskmanager--1163954626
+    namespace: default
+    resourceVersion: "53604403"
+    selfLink: /apis/apps/v1/namespaces/default/deployments/du-taskmanager--1163954626
+    uid: 2f3bae1b-e83e-461c-bfc7-a7c0c8116336
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: du-taskmanager--1163954626
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: du-taskmanager--1163954626
+      spec:
+        containers:
+        - args:
+          - taskmanager
+          - -Dtaskmanager.host=$(K8S_POD_IP)
+          env:
+          - name: JOB_MANAGER_RPC_ADDRESS
+            value: flinkjobmanager
+          - name: K8S_POD_IP
+            value: tasksvc
+          image: flink:latest
+          imagePullPolicy: Always
+          name: taskmanager--1356627504
+          ports:
+          - containerPort: 6121
+            name: data
+            protocol: TCP
+          - containerPort: 6122
+            name: rpc
+            protocol: TCP
+          - containerPort: 6125
+            name: query
+            protocol: TCP
+          - containerPort: 50100
+            name: metrics
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/flink/conf
+            name: taskmanager-1356627504-configmap-cfg--1388190740
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: taskmanager-1356627504-configmap-cfg--1388190740
+          name: taskmanager-1356627504-configmap-cfg--1388190740
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2021-04-19T14:12:38Z"
+      lastUpdateTime: "2021-04-19T14:12:38Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2021-04-19T14:12:35Z"
+      lastUpdateTime: "2021-04-19T14:12:38Z"
+      message: ReplicaSet "du-taskmanager--1163954626-59c45ccb95" has successfully
+        progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2021-04-12T19:50:50Z"
+    generation: 1
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector:
+            f:matchLabels:
+              .: {}
+              f:app: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"mongodb"}:
+                  .: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":27017,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-04-12T19:50:50Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-04-12T19:50:52Z"
+    name: mongodb-deployment
+    namespace: default
+    resourceVersion: "52193818"
+    selfLink: /apis/apps/v1/namespaces/default/deployments/mongodb-deployment
+    uid: 9dfba8de-96c1-4eed-b4cf-dd981dabc31e
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: book-store-mongodb
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: book-store-mongodb
+      spec:
+        containers:
+        - image: mongo:4.0.8
+          imagePullPolicy: Always
+          name: mongodb
+          ports:
+          - containerPort: 27017
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2021-04-12T19:50:52Z"
+      lastUpdateTime: "2021-04-12T19:50:52Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2021-04-12T19:50:50Z"
+      lastUpdateTime: "2021-04-12T19:50:52Z"
+      message: ReplicaSet "mongodb-deployment-79ccdcd86f" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

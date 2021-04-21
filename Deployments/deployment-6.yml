@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-deployment
+  labels: 
+    app: my-node-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-node-app
+  template:
+    metadata:
+      labels: 
+        app: my-node-app
+    spec:
+      #securityContext: # uid=1000(node) gid=3000 groups=3000,2000
+      #  runAsUser: 1000
+      #  runAsGroup: 3000
+      #  fsGroup: 2000 # used for files created in volume that will be GroupID 2000
+      containers:
+      - name: node-app
+        image: yulypso/node-app:v0.0.1
+        ports:
+        - name: nodejs-port
+          containerPort: 3000 # must be the image port
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 1500 # This will be the user ID (userID from pod will be ineffective)
+    

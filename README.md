@@ -292,6 +292,7 @@ root
 - **deployment-3.yml**: create a deployment with health check to ensure the availability and resiliency of the app even if the pod and deployment are still alive.
 - **deployment-4.yml**: create a deployment for lifecycle (postStar/preStop)
 - **deployment-5.yml**: create a deployment using Secrets
+- **deployment-6.yml**: create a deployment for security context for a pod/container
 
 ---
 
