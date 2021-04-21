@@ -30,5 +30,5 @@ spec:
             # Secrets must be created before creating the deployment
 
             # secrets are stored in : 
-            # /etc/creds/db-secrets/username
-            # /etc/creds/db-secrets/password
+            # /etc/creds/username
+            # /etc/creds/password
