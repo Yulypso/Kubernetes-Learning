@@ -238,6 +238,9 @@ $ kubectl {get, edit} {namespace}
 
 # watch in real time pod status
 $ watch -n1 kubectl get pod
+
+# using specific namespace/context=kube-system
+$ kubectl -n kube-system get secret
 ```
 
 ---
@@ -289,6 +292,27 @@ root
 - **deployment-3.yml**: create a deployment with health check to ensure the availability and resiliency of the app even if the pod and deployment are still alive.
 - **deployment-4.yml**: create a deployment for lifecycle (postStar/preStop)
 - **deployment-5.yml**: create a deployment using Secrets
+
+---
+
+<br/>
+
+### Namespaces 
+
+```bash
+# know current context (by default: docker-desktop namespace)
+$ kubectl config current-context
+
+$ kubectl config get-context
+
+$ kubectl get namespace
+
+# change namespace by configuring the context
+$ kubectl config set-context $(kubectl config current-context) --namespace=<namespace name>
+
+# we can create a deployment in a specific namespace
+$ kubectl create deployment --image nginx demo-nginx --namespace=<namespace name>
+```
 
 ---
 
