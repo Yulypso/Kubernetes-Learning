@@ -25,7 +25,7 @@ spec:
         - name: nodejs-port
           containerPort: 3000 # must be the image port
         securityContext:
-          allowPrivilegeEscalation: false
+          allowPrivilegeEscalation: false # false: drop all capabilities
           runAsUser: 1500 # This will be the user ID (userID from pod will be ineffective)
                           # uid=1500(node) gid=3000 groups=3000,2000
           capabilities:
