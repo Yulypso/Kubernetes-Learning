@@ -329,3 +329,35 @@ deployment.apps/wordpress-deployment created
 $ kubectl create -f Apps/Wordpress/wordpress-service.yml
 service/wordpress-service created
 ```
+
+---
+
+<br/>
+
+### ConfigMap
+
+Configuration parameters that are not secret can be put in a ConfigMap. 
+It can:
+- contains environment variables
+- contains container commandline arguments
+- use volumes
+- contains full configuration files for a webserver by mounting it using volumes to "inject" configuration settings into containers without changing the container itself
+
+```bash
+# create configmap from file
+$ kubectl create configmap nginx-config --from-file=ConfigMaps/Configurations/reverseproxy.conf
+
+$ kubectl get configmap
+NAME           DATA   AGE
+nginx-config   1      54s
+
+$ kubectl get configmap nginx-config -o yaml
+
+$ kubectl create -f Configmaps/nginx.yml
+$ kubectl create -f Configmaps/nginx-service.yml
+
+$ curl http://localhost:<nodePortIP> -v 
+
+# -c to specify which container to access within the pod
+$ kubectl exec -it helloworld-nginx -c nginx -- bash 
+```
