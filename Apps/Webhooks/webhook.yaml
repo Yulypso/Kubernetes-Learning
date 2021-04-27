@@ -1,0 +1,75 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: "mymutatingwebhook.panda.com"
+webhooks:
+- name: "mymutatingwebhook.panda.com"
+  namespaceSelector:
+    matchLabels:
+      webhook: enabled
+  rules:
+  - apiGroups:   [""]
+    apiVersions: ["v1"]
+    operations:  ["CREATE"]
+    resources:   ["pods"]
+  clientConfig:
+    service:
+      namespace: "webhooks"
+      name: "webhooks"
+      path: "/webhook"
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZ4ekNDQTYrZ0F3SUJBZ0lDQitNd0RRWUpLb1pJaHZjTkFRRUxCUUF3ZFRFTE1Ba0dBMVVFQmhNQ1ZWTXgKQ1RBSEJnTlZCQWdUQURFV01CUUdBMVVFQnhNTlUyRnVJRVp5WVc1amFYTmpiekViTUJrR0ExVUVDUk1TUjI5cwpaR1Z1SUVkaGRHVWdRbkpwWkdkbE1RNHdEQVlEVlFRUkV3VTVOREF4TmpFV01CUUdBMVVFQ2hNTlEyOXRjR0Z1CmVTd2dTVTVETGpBZUZ3MHlNVEEwTWpZeU1USTNOREphRncwek1UQTBNall5TVRJM05ESmFNSFV4Q3pBSkJnTlYKQkFZVEFsVlRNUWt3QndZRFZRUUlFd0F4RmpBVUJnTlZCQWNURFZOaGJpQkdjbUZ1WTJselkyOHhHekFaQmdOVgpCQWtURWtkdmJHUmxiaUJIWVhSbElFSnlhV1JuWlRFT01Bd0dBMVVFRVJNRk9UUXdNVFl4RmpBVUJnTlZCQW9UCkRVTnZiWEJoYm5rc0lFbE9ReTR3Z2dJaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQ0R3QXdnZ0lLQW9JQ0FRRE4KRVZEVTR2bkNqbjErT0wwVWRhWnZZT2J2NkcwL09MR0ZsT1p6amkyTktNeEpOaHlKWVJVYkFBNXd3WjBhOXYzVApuOUY1VHJFR2VOZjZOQjVEdmtwam1LUjFHMzJwSXprRFdKNTA4ZUJ3bDFwU1UrcjRZZ1hHKzVTdTk1bXEvcXd5ClBpYkhiK2JqcnFRZHlRNWYvcFhxcVlpOHkvUlJxRUZHanFHODEvTlA4WVpXMDN1THZXcXFsWjcwTVBCK3FJdU8KU2Q0Zk9GZUZmUHcrbVdHWkFDMEtWZFExY0hvSjlsSEV0QVl0aGxoVTNJNERIY2IwbzBPd1M3L01wcTRCNXFSOApIWlBFV2hhVm1uTmd1Q0NUQmF6clRsVWphVnRMdDhsSmU3UC9JR0xqMm5YeEoxZFV6UitOWXdKVlVGTmZqSzNZCmloV3VwOEc4WVJLRDNOTGRtK0pDUWpNbVJNZjBicG5rVXYrb2dxK3ptQTNaN2RrSmt6MEFSbUVWNUhrNTJXdGgKeGoySUpwY1Q1RTVmOGR0TkVNRW9vQjhaQk8vYkFUazZpMTd5ZWZuRkRMM2N1ZSthMmI4TFc3WEpreTEySEZpTQpwZ1BEcG9aUW8xc2dxVFJNSFdUMFpuM1NjVmVGZnVwWmZhTExuREhkTDVJNlRjK1U5cExORFNpNmZpcTlNZTJXCmVlTnFPdjdIcVBDOVRzK25DdForNWtQT2I4TnJMbzhTdy9wQ3FxRzNTanNOWWlJVzFmdGhDUFJqWkxaTWxMT2sKeHdyeEVtYUx1SW5RVlgxN1FSSHZmMVNVendjQ3lhV0c5UG1EMUlRSlFWRnc4SDdhb2pscFFBMjBtZzJGcm5DbgpPNlFKbUVyTElKQUExMyt2STE4N3dZenB6N0twWGpoVjQ2U1ZBejY0OHdJREFRQUJvMkV3WHpBT0JnTlZIUThCCkFmOEVCQU1DQW9Rd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3SUdDQ3NHQVFVRkJ3TUJNQThHQTFVZEV3RUIKL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRk9PTHNGTzJ4bExvZXMrTHVHRTI2TU5aeVp4eU1BMEdDU3FHU0liMwpEUUVCQ3dVQUE0SUNBUUJIWjZ4akpCVTFEeWJxQ2J5L0ZTZDVCaFUyYVBRT1MvOUtZQTlBMnBkWFFHYldkWGRjCjh6dDBJQUEwVGM0SjY4ejllQ05CTmxiZWl3QWJ1RVpIOW9oRTBTeEdpYzduSzVudmJxVGU4aUNkVHRIc1E5NlEKc3dIZFg1dWRjU1BUOG9UTWcrenJhZWx4YnM0ZjB3N243S09HSkhSdGgyZ2cyTmxLUXFXTnAwVkQ0TEszTk9nUApUTU5UYno1S04wcFN5ZHpybmF5eENWK0wydUl6SFJDUkxheGxLL2pWeEVIL0M0TVFydW9IZ3NORkNQME1ZeUZ3CkRJMkJPY0t3Y3JoWDlBMnJBVktXcENkU0s3STAzRys3bGF3UW5IWXhBKzdwUW43THFYWTd6SmtlYUlBN2EzT2QKK0loL0xsRzdoNkRkWnIxa3hTT09GWWZQNDhiT29nMkhrc3dVRGQ1VTcweGFzbEd1dDdkUmVnczl5N1JBajBkZApEcEtEMll5VU5JSWhmMWxTY0pDM1lrZ1c0d3lkbEcwRStQKzlwZG10WjRrRzMxeUxPaXgrbXhwNFA2eU5XRzk4Cnc2R2o5ejFGSW9wS0FUVXA1SXowUEljeHJOSmd0b21jZm9TQUh1SGVhcmxqSG55WW96K21oNGtQRFdNTUpZMCsKZDlSY21DY05tUVJoNDVrS3JpNUVmdmtCNjJuc3lyVHJPV05MdWpDUWc2aGdXUFIrSXBzQUl4a3Zuek1xQzJqZAowQjF2TGRpaUJFb0FFWmVxU0dhb29OVDNDZHRPUko1WTRlZ1NSL1k1SHZXZC9valNSR3JGUWtwM0RXQnpoWmhRCm5kcWR2VXBJTXhkNFAwZStxNlBNT3pITGlJOWg4cXFnTVhKbXo2NGJjRGlOQjJtdXhzREI2ZUNodnc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    # kubectl apply -f webhook.yaml
+    # kubectl exec -it -n webhooks $(kubectl get pods --no-headers -o custom-columns=":metadata.name" -n webhooks) -- wget -q -O- "localhost:8080/ca.pem?base64"
+    # must be empty before signed by CA.
+  admissionReviewVersions: ["v1", "v1beta1"]
+  sideEffects: None
+  timeoutSeconds: 5
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: webhooks
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: testwebhooks
+  labels:
+    webhook: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhooks
+  namespace: webhooks
+  labels:
+    app: webhooks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webhooks
+  template:
+    metadata:
+      labels:
+        app: webhooks
+    spec:
+      containers:
+      - name: webhooks
+        imagePullPolicy: Always
+        image: yulypso/webhook:v0.0.1
+        ports:
+        - containerPort: 8443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webhooks
+  namespace: webhooks
+spec:
+  selector:
+    app: webhooks
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8443
