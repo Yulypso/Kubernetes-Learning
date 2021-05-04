@@ -2,7 +2,7 @@
 
 ## Author
 
-[Thierry Khamphousone](https://www.linkedin.com/in/tkhamphousone/)
+[![Linkedin: Thierry Khamphousone](https://img.shields.io/badge/-Thierry_Khamphousone-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tkhamphousone/)](https://www.linkedin.com/in/tkhamphousone)
 
 ---
 
@@ -249,7 +249,10 @@ $ kubectl -n kube-system get secret
 
 ### Kubernetes Dashboard
 
+
 ```bash
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
+
 $ kubectl proxy &
 ```
 Browser acces: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/\#/service?namespace=default
@@ -304,7 +307,7 @@ root
 # know current context (by default: docker-desktop namespace)
 $ kubectl config current-context
 
-$ kubectl config get-context
+$ kubectl config get-contexts
 
 $ kubectl get namespace
 
